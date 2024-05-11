@@ -1,0 +1,177 @@
+import Axis from 'bizcharts/es/components/Axis';
+import Chart from 'bizcharts/es/components/Chart';
+import Point from 'bizcharts/es/geometry/Point';
+import Line from 'bizcharts/es/geometry/Line';
+import Legend from 'bizcharts/es/components/Legend';
+import Tooltip from 'bizcharts/es/components/Tooltip';
+import moment, { Moment } from 'moment';
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useWindowSize } from 'react-use';
+import { DEFAULT_AXIS_10, TIME_UNITS } from '~/configs';
+import { numberFormatDecimal } from '~/views/utilities/helpers/currency';
+
+type NewLineChartProps = {
+  data: any;
+  label?: string;
+  params?: any;
+  height?: number;
+  scale?: any;
+  showLegend?: boolean;
+  xAxis?: string;
+  position?: string;
+  color?: string;
+  isPrice?: boolean;
+  className?: any;
+  tooltipName?: any;
+};
+
+const NewLineChart: React.FC<NewLineChartProps> = (props) => {
+  const { t }: any = useTranslation();
+  const { width } = useWindowSize();
+  const [columnNumber, setColumnNumber] = useState(0);
+  const [chartData, setChartData] = useState<any[]>([]);
+
+  useEffect(() => {
+    let chartData: any = getChartData(getDataChartByTime(props.data, props.params), props.label);
+
+    setChartData(chartData);
+  }, [props.data, props.params]);
+
+  const getDiff = (fromDate: Moment, toDate: Moment, timeBy: string) => {
+    if (timeBy === TIME_UNITS.DATE.toLowerCase()) return toDate.diff(fromDate, 'days');
+    else {
+      const newTimeBy: any = `${timeBy}s`;
+      return toDate.diff(fromDate, newTimeBy);
+    }
+  };
+
+  const getTimeSubtract = (toDate: Moment, i: number, timeBy: any) => {
+    const newTimeBy: any = timeBy === TIME_UNITS.DATE.toLowerCase() ? 'days' : `${timeBy}s`;
+    return toDate.subtract(i, newTimeBy).startOf(timeBy.toLowerCase());
+  };
+
+  const formatDate = (obj: any, timeBy: string) => {
+    switch (timeBy) {
+      case TIME_UNITS.DATE.toLowerCase():
+        return obj.time.format('DD/MM/YYYY');
+      case TIME_UNITS.MONTH.toLowerCase():
+        return obj.time.format('M/YYYY');
+      case TIME_UNITS.QUARTER.toLowerCase():
+        return `Q${obj.time.format('Q/YYYY')}`;
+      case TIME_UNITS.YEAR.toLowerCase():
+        return obj.time.format('YYYY');
+      default:
+        return;
+    }
+  };
+
+  //------------------------------------
+  // GET STATISTIC FOR LINE CHART
+  //------------------------------------
+  const getDataChartByTime = (chartData: any[], params: any) => {
+    let dateList: any = [];
+
+    // khoảng thời gian từ fromDate đến toDate
+    const diff: any = getDiff(moment(params.fromDate), moment(params.toDate), params.timeBy);
+
+    // lấy danh sách thời gian theo ngày/tháng/quý/năm từ fromDate đến toDate
+    for (let i = diff; i >= 0; i--) {
+      dateList.push({ time: getTimeSubtract(moment(params.toDate), i, params.timeBy) });
+    }
+
+    setColumnNumber(dateList.length);
+
+    dateList.forEach((obj: any, index: number) => {
+      const date = obj.time;
+      const endOfTime = moment(date).endOf(params.timeBy.toLowerCase()); // ngày cuối cùng của date
+
+      let sum = 0;
+
+      // lấy các giá trị từ ngày đầu tiên đến ngày cuối cùng trong danh sách thời gian rồi tính tổng
+      chartData?.forEach((data: any) => {
+        if (moment(data.date).isBetween(moment(date), moment(endOfTime), undefined, '[]')) {
+          sum += data.statisticValue;
+        }
+      });
+
+      dateList[index].sumValue = sum;
+    });
+
+    const result = dateList.map((obj: any) => ({
+      date: formatDate(obj, params.timeBy),
+      count: obj.sumValue
+    }));
+
+    return result?.every((item: any) => !item.count)
+      ? [
+          ...result,
+          {
+            count: DEFAULT_AXIS_10
+          }
+        ]
+      : result;
+  };
+
+  const getChartData = (statisticData: any[], label?: string) => {
+    const result = (statisticData || []).map((item) => {
+      return {
+        date: item?.date,
+        type: label,
+        count: item?.count //the lib bizcharts chart only display correct y axis if the data is number
+      };
+    });
+    return result;
+  };
+  //------------------------------------
+  // GET STATISTIC FOR LINE CHART
+  //------------------------------------
+
+  return (
+    <div className={props.className || 'mb-5'}>
+      <Chart
+        height={props.height || 300}
+        width={columnNumber > 12 || width < 576 ? 300 + columnNumber * 50 : undefined}
+        data={chartData}
+        scale={props.scale || { count: { nice: true } }}
+        autoFit>
+        <Legend visible={props.showLegend || false} />
+        <Axis name={props.xAxis || 'month'} />
+        <Axis
+          name="count"
+          label={{
+            formatter: (text, item, index) => {
+              return numberFormatDecimal(+text);
+            }
+          }}
+        />
+        <Tooltip
+          title={(e) => e}
+          customItems={(e) => {
+            return [
+              {
+                ...e[0],
+                value: numberFormatDecimal(+e[0].value, props.isPrice ? ' đ' : '', ''),
+                name: t(e[0].name)
+              }
+            ];
+          }}
+        />
+        <Point
+          type="point"
+          position={props.position || 'date*count'}
+          size={4}
+          shape={'circle'}
+          color={props.color}
+          style={{
+            stroke: '#fff',
+            lineWidth: 1
+          }}
+        />
+        <Line type="line" position={props.position || 'date*count'} size={2} color={props.color} shape={'line'} />
+      </Chart>
+    </div>
+  );
+};
+
+export default React.memo(NewLineChart);

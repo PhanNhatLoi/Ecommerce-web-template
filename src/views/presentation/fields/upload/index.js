@@ -1,0 +1,11 @@
+export { default as MUploadCardIDCrop } from './UploadCardIDCrop';
+export { default as MUpload } from './Upload';
+export { default as MUploadDocument } from './UploadDocument';
+export { default as MUploadDragger } from './UploadDragger';
+export { default as MUploadImageCrop } from './UploadImageCrop';
+export { default as MUploadImageCropMultiple } from './UploadImageCropMultiple';
+export { default as MUploadImageCropMultipleNoStyle } from './UploadImageCropMultipleNoStyle';
+export { default as MUploadImageCropNoStyle } from './UploadImageCropNoStyle';
+export { default as MUploadImageCropWithBtn } from './UploadImageCropWithBtn';
+export { default as MUploadImageNoCropMultiple } from './UploadImageNoCropMultiple';
+export { default as MBasicUpload } from './BasicUpload';

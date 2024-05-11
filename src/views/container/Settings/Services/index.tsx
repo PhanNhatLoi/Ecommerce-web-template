@@ -1,0 +1,28 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+
+import { Card, CardBody, CardHeader } from '~/views/presentation/ui/card/Card';
+
+import ServiceList from './ServiceCheckList';
+
+const SettingServices = () => {
+  const { t }: any = useTranslation();
+
+  return (
+    <Card>
+      <CardHeader
+        className="d-flex flex-wrap w-100"
+        titleHeader={
+          <div className="d-flex flex-column mr-3 my-5 pb-5 pb-lg-1">
+            <h2>{t('settings_service').toUpperCase()}</h2>
+            <div className="text-muted w-100">{t('settings_service_des')}</div>
+          </div>
+        }></CardHeader>
+      <CardBody className="pt-4">
+        <ServiceList />
+      </CardBody>
+    </Card>
+  );
+};
+
+export default SettingServices;

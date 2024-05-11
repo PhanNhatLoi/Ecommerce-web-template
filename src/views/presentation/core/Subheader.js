@@ -1,0 +1,80 @@
+import React, { createContext, useContext, useState } from 'react';
+import { DEFAULT_PARAMS } from '~/views/container/commons/DashboardChooseDate';
+
+export function getBreadcrumbsAndTitle(menuId, pathName) {
+  const result = {
+    breadcrumbs: [],
+    title: ''
+  };
+
+  const menu = document.getElementById(menuId);
+  if (!menu) {
+    return result;
+  }
+
+  const activeLinksArray = Array.from(menu.getElementsByClassName('active') || []);
+
+  const activeLinks = activeLinksArray.filter((el) => el.tagName === 'A');
+  if (!activeLinks) {
+    return result;
+  }
+
+  activeLinks.forEach((link) => {
+    const titleSpans = link.getElementsByClassName('menu-text');
+    if (titleSpans) {
+      const titleSpan = Array.from(titleSpans).find((t) => t.innerHTML && t.innerHTML.trim().length > 0);
+      if (titleSpan) {
+        result.breadcrumbs.push({
+          pathname: link.pathname.replace(process.env.PUBLIC_URL, ''),
+          title: titleSpan.innerHTML
+        });
+      }
+    }
+  });
+  result.title = getTitle(result.breadcrumbs, pathName);
+  return result;
+}
+
+export function getTitle(breadCrumbs, pathname) {
+  if (!breadCrumbs || !pathname) {
+    return '';
+  }
+
+  const length = breadCrumbs.length;
+  if (!length) {
+    return '';
+  }
+
+  return breadCrumbs[length - 1].title;
+}
+
+const SubheaderContext = createContext();
+
+export function useSubheader() {
+  return useContext(SubheaderContext);
+}
+
+export const SubheaderConsumer = SubheaderContext.Consumer;
+
+export function SubheaderProvider({ children }) {
+  const [title, setTitle] = useState('');
+  const [breadcrumbs, setBreadcrumbs] = useState([]);
+  const [useDates, setUseDates] = useState(false);
+  const [dates, setDates] = useState({ from: '', to: '', type: '' });
+  const resetDates = () => setDates({ from: '', to: '', type: '' });
+  const [dashboardDate, setDashboardDate] = useState(DEFAULT_PARAMS);
+  const value = {
+    title,
+    setTitle,
+    breadcrumbs,
+    setBreadcrumbs,
+    useDates,
+    setUseDates,
+    dates,
+    setDates,
+    resetDates,
+    dashboardDate,
+    setDashboardDate
+  };
+  return <SubheaderContext.Provider value={value}>{children}</SubheaderContext.Provider>;
+}

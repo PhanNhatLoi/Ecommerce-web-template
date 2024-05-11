@@ -1,0 +1,113 @@
+import moment from 'moment';
+import objectPath from 'object-path';
+import qs from 'query-string';
+import { withTranslation } from 'react-i18next';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
+import { compose, fromRenderProps, withHandlers, withState } from 'recompose';
+import { incidentActions } from '~/state/ducks/incident';
+import { memberActions } from '~/state/ducks/member';
+import { SubheaderConsumer } from '~/views/presentation/core/Subheader';
+import { UtilDate } from '~/views/utilities/helpers';
+import { generatePagination } from '~/views/utilities/helpers/utilURLParam';
+import { withTableReducer } from '../../../enhancers';
+
+export const fetchIncidents = (props, sorter, pagination = generatePagination(), filters = {}) => {
+  const {
+    getMembers,
+    dispatchData,
+    dispatchFail,
+    dispatchSuccess,
+    location,
+    context: { dates }
+  } = props;
+
+  const search = qs.parse(location.search);
+
+  let order = objectPath.get(sorter, 'sortOrder');
+  let columnKey = objectPath.get(sorter, 'sortField');
+  let sorterObject = {};
+  if (columnKey && order) {
+    sorterObject = { sort: `${columnKey},${order}` };
+  }
+
+  const query = {
+    ...sorterObject,
+    ...pagination,
+    ...filters,
+    keyword: search.keyword,
+    from: dates.from,
+    to: dates.to
+  };
+
+  dispatchData(query);
+  getMembers(query)
+    .then(({ content, headers }) => {
+      dispatchSuccess(objectPath.get(content, undefined, []), parseInt(objectPath.get(headers, 'x-total-count', 0)));
+    })
+    .catch((err) => {
+      dispatchFail();
+    });
+};
+
+export const fetchIncidentsChart = (props) => {
+  const {
+    getIncidentNewestChart,
+    setDataChart,
+    context: { dates }
+  } = props;
+
+  const query = {
+    fromDate: dates.from,
+    toDate: dates.to,
+    groupType: 'DAY'
+  };
+
+  getIncidentNewestChart(query)
+    .then(({ content, headers }) => {
+      const data = objectPath.get(content, 'data', [])?.map((trou) => trou.countAllTrouble);
+      const labels = objectPath.get(content, 'data', [])?.map((trou) => UtilDate.toDateLocal(trou.date));
+      setDataChart({ data, labels });
+    })
+    .catch((err) => {
+      console.error('%c [ err ]', 'font-size:13px; background:pink; color:#bf2c9f;', err);
+    });
+};
+
+export default compose(
+  withRouter,
+  withTableReducer,
+  withTranslation(),
+  withState('dataChart', 'setDataChart', { data: [], labels: [] }),
+  fromRenderProps(SubheaderConsumer, (props) => ({ context: props })),
+  connect(null, {
+    getMembers: memberActions.getMembers,
+    getIncidentNewestChart: incidentActions.getIncidentNewestChart
+  }),
+  withHandlers({
+    handleTableChange: (props) => (type, newState) => {
+      let filters = objectPath.get(newState, 'filters', {});
+      const keys = Object.keys(filters);
+      let filtersData = {};
+      keys.forEach((key) => {
+        let value = objectPath.get(filters[key], 'filterVal');
+
+        if (objectPath.get(filters[key], 'filterType') === 'DATE') {
+          filtersData[key] = UtilDate.toDateTimeUtc(moment(objectPath.get(value, 'date')).startOf('day'));
+        } else {
+          filtersData[key] = value;
+        }
+      });
+
+      const sorter = {
+        sortField: objectPath.get(newState, 'sortField'),
+        sortOrder: objectPath.get(newState, 'sortOrder')
+      };
+      const pagination = {
+        page: objectPath.get(newState, 'page') - 1 || 0,
+        size: objectPath.get(newState, 'sizePerPage')
+      };
+      fetchIncidents(props, sorter, pagination, filtersData);
+    }
+  })
+);
