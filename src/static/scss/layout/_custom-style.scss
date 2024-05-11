@@ -1,0 +1,32 @@
+/*Danny:: overwirde .ant-btn*/
+.ant-btn {
+	font-size: 12px!important;
+}
+.btn {
+	font-size: 12px!important;
+}
+.ant-input {
+	font-size: 12px!important;
+}
+.ant-select {
+	font-size: 12px!important;
+}
+.ant-picker-input > input {
+	font-size: 12px!important;
+}
+.text-muted {
+    font-size: 12px!important;
+}
+.ant-btn-primary {
+    background: #0a5b66!important;
+    border-color: #0a5b66!important;
+}
+
+.ant-btn-primary:hover, .ant-btn-primary:focus {
+	color: #bbb!important
+}
+
+.ant-btn-primary[disabled] {
+	color: #818181!important
+}
+/*End Danny:: overwirde .ant-btn*/

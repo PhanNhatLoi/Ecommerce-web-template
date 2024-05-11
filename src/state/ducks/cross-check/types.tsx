@@ -1,0 +1,4 @@
+export const GET_DELIVERY_ORDER = 'promotion/GET_DELIVERY_ORDER';
+export const CREATE_CROSS_CHECK = 'promotion/CREATE_CROSS_CHECK';
+export const GET_CROSS_CHECK = 'items/GET_CROSS_CHECK';
+export const GET_CREATE_AR_INVOICE_DETAIL = 'promotion/GET_CREATE_AR_INVOICE_DETAIL';

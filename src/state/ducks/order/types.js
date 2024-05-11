@@ -1,0 +1,13 @@
+export const GET_ORDERS = 'orders/GET_ORDERS';
+export const GET_ORDER_STATISTIC = 'orders/GET_ORDER_STATISTIC';
+export const GET_ORDER_DETAIL = 'orders/GET_ORDER_DETAIL';
+export const CREATE_ORDER = 'orders/CREATE_ORDER';
+export const UPDATE_ORDER = 'orders/UPDATE_ORDER';
+export const APPROVE_ORDER = 'orders/APPROVE_ORDER';
+export const BLOCK_ORDER = 'orders/BLOCK_ORDER';
+export const REJECT_ORDER = 'orders/REJECT_ORDER';
+export const DELETE_ORDER = 'orders/DELETE_ORDER';
+export const GET_REQUEST_ORDERS = 'orders/GET_REQUEST_ORDERS';
+export const GET_REPAIR_STATISTIC = 'orders/GET_REPAIR_STATISTIC';
+export const GET_PAYMENT_INFO = 'orders/GET_PAYMENT_INFO';
+export const GET_CONSUMER_DETAIL = 'orders/GET_CONSUMER_DETAIL';

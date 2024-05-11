@@ -1,0 +1,98 @@
+import React from 'react';
+import { StatusCssClasses } from '~/views/presentation/table-bootstrap-hook/Status/StatusCssClasses';
+
+export const SALE_ORDER_STATUS = {
+  WAITING: 'WAITING',
+  ACCEPTED_BY_VENDOR: 'ACCEPTED_BY_VENDOR',
+  ACCEPTED: 'ACCEPTED',
+  PACKAGED: 'PACKAGED',
+  VIETTEL_POST_PENDING: 'VIETTEL_POST_PENDING',
+  SHIPPING: 'SHIPPING',
+  // DELIVERED: 'DELIVERED',
+  DONE: 'DONE',
+  REJECTED: 'REJECTED',
+  CANCELED: 'CANCELED',
+  UNABLE_TO_DELIVER: 'UNABLE_TO_DELIVER',
+  DELETED: 'DELETED',
+  WAITING_BANK_TRANSFERRED_CONFIRM: 'WAITING_BANK_TRANSFERRED_CONFIRM',
+  WAITING_BANK_TRANSFER: 'WAITING_BANK_TRANSFER',
+  PAYMENT_RECEIVED_BY_ECARAID: 'PAYMENT_RECEIVED_BY_ECARAID'
+};
+
+export const SALE_ORDER_STATUS_RES = {
+  WAITING: 'SO_WATTING',
+  ACCEPTED_BY_VENDOR: 'SO_WATTING',
+  ACCEPTED: 'SO_ACCEPTED',
+  PACKAGED: 'SO_PACKAGE',
+  VIETTEL_POST_PENDING: 'SO_VIETTEL_POST_PENDING',
+  UNABLE_TO_DELIVER: 'SO_UNABLE_TO_DELIVER',
+  SHIPPING: 'SO_SHIPPING',
+  // DELIVERED: 'SO_DELIVERED',
+  DONE: 'SO_DONE',
+  REJECTED: 'SO_REJECTED',
+  CANCELED: 'SO_CANCELED',
+  WAITING_BANK_TRANSFERRED_CONFIRM: 'SO_WAITING_BANK_TRANSFERRED_CONFIRM',
+  WAITING_BANK_TRANSFER: 'SO_WAITING_BANK_TRANSFER',
+  PAYMENT_RECEIVED_BY_ECARAID: 'SO_PAYMENT_RECEIVED_BY_ECARAID'
+};
+
+export const STATUS_ORDER = [
+  SALE_ORDER_STATUS.WAITING,
+  SALE_ORDER_STATUS.ACCEPTED_BY_VENDOR,
+  SALE_ORDER_STATUS.ACCEPTED,
+  SALE_ORDER_STATUS.REJECTED,
+  SALE_ORDER_STATUS.PACKAGED,
+  SALE_ORDER_STATUS.VIETTEL_POST_PENDING,
+  SALE_ORDER_STATUS.SHIPPING,
+  // SALE_ORDER_STATUS.DELIVERED
+  SALE_ORDER_STATUS.DONE
+];
+
+export const STEP = {
+  [SALE_ORDER_STATUS.WAITING]: 0,
+  [SALE_ORDER_STATUS.ACCEPTED_BY_VENDOR]: 0,
+  [SALE_ORDER_STATUS.PAYMENT_RECEIVED_BY_ECARAID]: 0,
+  [SALE_ORDER_STATUS.ACCEPTED]: 1,
+  [SALE_ORDER_STATUS.REJECTED]: 1,
+  [SALE_ORDER_STATUS.PACKAGED]: 2,
+  [SALE_ORDER_STATUS.VIETTEL_POST_PENDING]: 2,
+  [SALE_ORDER_STATUS.SHIPPING]: 3,
+  // [SALE_ORDER_STATUS.DELIVERED]: 4
+  [SALE_ORDER_STATUS.DONE]: 4
+};
+
+export const renderSaleOrderStatus = (status, localize, type = 'string') => {
+  if (type === 'string') {
+    return localize;
+  } else if (type === 'tag') {
+    let classNameStyle;
+    switch (status) {
+      case SALE_ORDER_STATUS.WAITING:
+      case SALE_ORDER_STATUS.ACCEPTED_BY_VENDOR:
+      case SALE_ORDER_STATUS.PAYMENT_RECEIVED_BY_ECARAID:
+        classNameStyle = StatusCssClasses.warning;
+        break;
+      case SALE_ORDER_STATUS.ACCEPTED:
+        classNameStyle = StatusCssClasses.primary;
+        break;
+      case SALE_ORDER_STATUS.REJECTED:
+      case SALE_ORDER_STATUS.CANCELED:
+      case SALE_ORDER_STATUS.UNABLE_TO_DELIVER:
+        classNameStyle = StatusCssClasses.danger;
+        break;
+      case SALE_ORDER_STATUS.PACKAGED:
+      case SALE_ORDER_STATUS.VIETTEL_POST_PENDING:
+        classNameStyle = StatusCssClasses.info;
+        break;
+      case SALE_ORDER_STATUS.SHIPPING:
+        classNameStyle = StatusCssClasses.link;
+        break;
+      case SALE_ORDER_STATUS.DONE:
+        classNameStyle = StatusCssClasses.success;
+        break;
+      default:
+        break;
+    }
+    return <span className={`label label-lg label-light-${classNameStyle} label-inline text-nowrap`}>{localize}</span>;
+  }
+};

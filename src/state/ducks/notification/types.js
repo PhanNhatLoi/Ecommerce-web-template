@@ -1,0 +1,8 @@
+export const GET_NOTIFICATIONS = 'notifications/GET_NOTIFICATIONS';
+export const GET_NOTIFICATION_STATISTIC = 'notifications/GET_NOTIFICATION_STATISTIC';
+export const GET_NOTIFICATION_DETAIL = 'notifications/GET_NOTIFICATION_DETAIL';
+export const CREATE_NOTIFICATION = 'notifications/CREATE_NOTIFICATION';
+export const UPLOAD_NOTIFICATION = 'notifications/UPLOAD_NOTIFICATION';
+export const DELETE_NOTIFICATION = 'notifications/DELETE_NOTIFICATION';
+export const GET_ALL_MECHANICS = 'notifications/GET_ALL_MECHANICS';
+export const GET_RECEIVER_PROFILES = 'notifications/GET_RECEIVER_PROFILES';

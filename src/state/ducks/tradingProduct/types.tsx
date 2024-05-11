@@ -1,0 +1,1 @@
+export const GET_TRADING_PRODUCTS = 'promotion/GET_TRADING_PRODUCTS';

@@ -1,0 +1,2 @@
+export const GET_VENDOR_RATING = 'ratings/GET_VENDOR_RATING'
+export const GET_MECHANIC_RATING = 'ratings/GET_MECHANIC_RATING'

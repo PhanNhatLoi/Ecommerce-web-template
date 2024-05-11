@@ -1,0 +1,174 @@
+.ant-switch-inner {
+  .anticon {
+    vertical-align: middle;
+  }
+}
+.ant-message-custom-content {
+  display: flex;
+  align-items: center;
+}
+
+.ant-form-item-has-feedback.ant-form-item-has-success .ant-form-item-children-icon,
+.ant-form-item-has-feedback.ant-form-item-has-warning .ant-form-item-children-icon,
+.ant-form-item-has-feedback.ant-form-item-has-error .ant-form-item-children-icon,
+.ant-form-item-has-feedback.ant-form-item-is-validating .ant-form-item-children-icon {
+  top: 41%;
+}
+
+
+.ant-btn-primary {
+  // background: #000;
+  // border-color: #000;
+  background: #0B2C3A;
+  border-color: #0B2C3A;
+  border-width: 2px;
+}
+
+.ant-btn-primary:hover, .ant-btn-primary:focus {
+	/* color: #bbb!important */
+	background: linear-gradient(0deg, rgba(255, 255, 255, 0.30) 0%, rgba(255, 255, 255, 0.30) 100%), rgba(11, 44, 58, 0.50);
+  border-color: #0B2C3A;
+	color: #fff;
+}
+
+.ant-btn-ghost {
+  border: solid 2px #0B2C3A;
+  color: #0B2C3A;
+}
+.ant-btn-ghost:hover, .ant-btn-ghost:focus {
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.30) 0%, rgba(255, 255, 255, 0.30) 100%), rgba(11, 44, 58, 0.50);
+  border-color: #0B2C3A;
+  color :#0B2C3A;
+}
+
+.ant-btn-primary[disabled], .ant-btn-ghost[disabled] {
+	background: #f4f4f4;
+}
+
+.ant-form-item-explain.ant-form-item-explain-error {
+  text-align: start;
+}
+
+.btn.btn-hover-primary:hover:not(.btn-text):not(:disabled):not(.disabled),
+.btn.btn-hover-primary:focus:not(.btn-text),
+.btn.btn-hover-primary.focus:not(.btn-text) {
+  border: none !important;
+}
+
+.ant-input-affix-wrapper,
+.ant-select-selector,
+.ant-select:not(.ant-select-customize-input) .ant-select-selector,
+.ant-input,
+.ant-input-number,
+.ant-picker {
+  border: none;
+  box-shadow: none;
+  border: 1px solid var(--gray-colors-gray-5, #9CA3AF) ;
+  border-radius: 7px;
+  // background: var(--gray-colors-white, #FFF);
+}
+
+// .ant-form-item-control-input{
+//   background-color: red;
+// }
+
+.ant-btn > span{
+	display: inline-block ; 
+}
+
+
+.ant-input-search > .ant-input-group > .ant-input-group-addon:last-child .ant-input-search-button {
+  height: 32px;
+}
+
+.ant-input-group > .ant-input:first-child, .ant-input-group-addon:first-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.ant-input-affix-wrapper-focused,
+.ant-input-affix-wrapper:focus,
+.ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input) .ant-select-selector,
+// .ant-input:focus,
+.ant-cascader-picker:focus,
+.ant-input-number:focus,
+.ant-input-number-focused,
+.ant-picker:focus {
+  box-shadow: none;
+  border: 1px solid var(--brand-colors-primary, #116ACC);
+  background: rgba(11, 44, 58, 0.10);
+}
+
+.ant-input-affix-wrapper-hovered,
+.ant-input-affix-wrapper:hover,
+.ant-select-hover:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input) .ant-select-selector,
+// .ant-input:hover,
+.ant-cascader-picker:hover,
+.ant-input-number:hover,
+.ant-picker:hover {
+  box-shadow: none;
+  border: 1px solid var(--brand-colors-primary, #116ACC);
+  background: rgba(160, 195, 255, 0.05);
+}
+
+.ant-input{
+  background: transparent
+}
+
+
+
+
+.ant-checkbox-inner {
+  border: 1px solid #000;
+}
+
+.ant-form-item-label > label,
+.ant-upload,
+.ant-form-item-explain,
+.ant-form-item-extra,
+.ant-steps-item-title,
+.ant-table-cell {
+  font-size: 12px !important;
+}
+
+.ant-form-item {
+  margin-bottom: 5px;
+}
+
+.ant-descriptions-bordered .ant-descriptions-item-label,
+.ant-descriptions-bordered .ant-descriptions-item-content {
+  padding: 5px 8px;
+}
+
+.ant-select-clear .anticon-close-circle {
+  font-size: 14px !important;
+  position: absolute !important;
+  bottom: 0px !important;
+}
+
+.ant-picker-range .anticon-close-circle {
+  font-size: 14px !important;
+  bottom: -8px !important;
+}
+
+.ant-input-suffix .anticon-close-circle {
+  font-size: 14px !important;
+  top: 0px !important;
+  right: 8px !important;
+}
+
+.ant-radio-wrapper {
+  font-size: 12px !important;
+}
+
+.btn.btn-hover-primary:not(:disabled):not(.disabled).active,
+.btn.btn-hover-primary:hover:not(.btn-text):not(:disabled):not(.disabled),
+.btn.btn-hover-primary:focus:not(.btn-text),
+.btn.btn-hover-primary.focus:not(.btn-text) {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+.ant-form-item-feedback-icon-success {
+  color: #207FA7;
+}

@@ -1,0 +1,15 @@
+export const GET_MEMBERS = 'member/GET_MEMBERS';
+export const GET_RECEIVERS = 'member/GET_RECEIVERS';
+export const GET_MEMBER_REQUESTS = 'member/GET_MEMBER_REQUESTS';
+export const GET_MEMBER_STATISTIC = 'member/GET_MEMBER_STATISTIC';
+export const GET_MEMBER_REQUEST_STATISTIC = 'member/GET_MEMBER_REQUEST_STATISTIC';
+export const GET_MEMBER_DETAIL = 'member/GET_MEMBER_DETAIL';
+export const CREATE_MEMBER = 'member/CREATE_MEMBER';
+export const UPLOAD_MEMBER = 'member/UPLOAD_MEMBER';
+export const DELETE_MEMBER = 'member/DELETE_MEMBER';
+export const APPROVE_MEMBER = 'member/APPROVE_MEMBER';
+export const BLOCK_MEMBER = 'member/BLOCK_MEMBER';
+export const REJECT_MEMBER = 'member/REJECT_MEMBER';
+export const GET_MEMBER_REQUEST_LIST = 'member/GET_MEMBER_REQUEST';
+export const GET_CHAT_ROLE_DETAIL = 'member/GET_CHAT_ROLE_DETAIL';
+export const ASSIGN_CHAT_ROLE = 'member/ASSIGN_CHAT_ROLE';

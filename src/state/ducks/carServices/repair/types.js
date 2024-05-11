@@ -1,0 +1,6 @@
+export const GET_REPAIRS = 'repair/GET_REPAIRS';
+export const GET_REPAIR_STATISTIC = 'repair/GET_REPAIR_STATISTIC';
+export const CANCEL_REPAIR = 'repair/CANCEL_REPAIR';
+export const SEND_DONE_CONFIRMATION = 'repair/SEND_DONE_CONFIRMATION';
+export const CONFIRM_CASH_PAYMENT = 'repair/CONFIRM_CASH_PAYMENT';
+export const GET_REPAIR_DETAIL = 'repair/GET_REPAIR_DETAIL';

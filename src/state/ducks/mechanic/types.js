@@ -1,0 +1,12 @@
+export const GET_MECHANICS = 'mechanic/GET_MECHANICS';
+export const GET_MECHANIC_STATISTIC = 'mechanic/GET_MECHANIC_STATISTIC';
+export const GET_MECHANIC_DETAIL = 'mechanic/GET_MECHANIC_DETAIL';
+export const CREATE_MECHANIC = 'mechanic/CREATE_MECHANIC';
+export const UPDATE_MECHANIC = 'mechanic/UPDATE_MECHANIC';
+export const APPROVE_MECHANIC = 'mechanic/APPROVE_MECHANIC';
+export const BLOCK_MECHANIC = 'mechanic/BLOCK_MECHANIC';
+export const REJECT_MECHANIC = 'mechanic/REJECT_MECHANIC';
+export const DELETE_MECHANIC = 'mechanic/DELETE_MECHANIC';
+export const GET_REQUEST_MECHANICS = 'mechanic/GET_REQUEST_MECHANICS';
+export const GET_REPAIR_STATISTIC = 'mechanic/GET_REPAIR_STATISTIC';
+export const GET_TOP_MECHANICS = 'mechanic/GET_TOP_MECHANICS';

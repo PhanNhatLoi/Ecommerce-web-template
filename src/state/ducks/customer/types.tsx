@@ -1,0 +1,14 @@
+export const GET_CUSTOMERS = 'customer/GET_CUSTOMERS';
+export const GET_CUSTOMER_STATISTIC = 'customer/GET_CUSTOMER_STATISTIC';
+export const GET_CUSTOMER_DETAIL = 'customer/GET_CUSTOMER_DETAIL';
+export const CREATE_CUSTOMER = 'customer/CREATE_CUSTOMER';
+export const UPDATE_CUSTOMER = 'customer/UPDATE_CUSTOMER';
+export const APPROVE_CUSTOMER = 'customer/APPROVE_CUSTOMER';
+export const BLOCK_CUSTOMER = 'customer/BLOCK_CUSTOMER';
+export const REJECT_CUSTOMER = 'customer/REJECT_CUSTOMER';
+export const DELETE_CUSTOMER = 'customer/DELETE_CUSTOMER';
+export const GET_REQUEST_CUSTOMERS = 'customer/GET_REQUEST_CUSTOMERS';
+export const GET_REPAIR_STATISTIC = 'customer/GET_REPAIR_STATISTIC';
+export const DEACTIVATE_CUSTOMER = 'customer/DEACTIVATE_CUSTOMER';
+export const ACTIVATE_CUSTOMER = 'customer/ACTIVATE_CUSTOMER';
+export const GET_CUSTOMER_ORDERS = 'customer/GET_CUSTOMER_ORDERS';

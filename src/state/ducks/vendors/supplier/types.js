@@ -1,0 +1,9 @@
+export const GET_SUPPLIERS = 'supplier/GET_SUPPLIERS';
+export const GET_DETAIL_SUPPLIER = 'supplier/GET_DETAIL_SUPPLIER';
+export const CREATE_SUPPLIER = 'supplier/CREATE_SUPPLIER';
+export const APPROVE_SUPPLIER = 'supplier/APPROVE_SUPPLIER';
+export const REMOVE_SUPPLIER = 'supplier/REMOVE_SUPPLIER';
+export const UPDATE_SUPPLIER = 'supplier/UPDATE_SUPPLIER';
+export const GET_SUPPLIER_STATISTICS = 'supplier/GET_SUPPLIER_STATISTICS';
+export const ACTIVATE_SUPPLIER = 'supplier/ACTIVATE_SUPPLIER';
+export const DEACTIVATE_SUPPLIER = 'supplier/DEACTIVATE_SUPPLIER';
