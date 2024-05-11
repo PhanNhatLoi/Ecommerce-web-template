@@ -1,0 +1,10 @@
+node_modules
+.git
+.vscode
+app.yml
+Dockerfile
+.gitignore
+.dockerignore
+README.md
+build
+.project

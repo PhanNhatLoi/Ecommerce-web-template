@@ -1,0 +1,42 @@
+cache: 
+  key: '$CI_COMMIT_REF_NAME'
+  paths:
+    - node_modules/
+    - .yarn
+    
+stages:
+  - build
+  - deploy
+  
+variables:
+  IMAGE_TAG: $CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA
+
+before_script:
+  - export NG_CLI_ANALYTICS="false"
+
+
+build:
+  stage: build
+  script:
+    - "docker build -t registry.gitlab.com/malu-platform/merchant/merchant-web:$IMAGE_TAG ."
+    - "docker push registry.gitlab.com/malu-platform/merchant/merchant-web:$IMAGE_TAG "
+  only:
+    - /^release-uat-v(?:.[0-9]+)+$/
+    - /^release-v(?:.[0-9]+)+$/
+
+deploy_uat: 
+  stage: deploy
+  script: 
+    - ssh -tt root@103.170.123.141 "export IMAGE_TAG=$IMAGE_TAG && docker stack deploy -c /home/docker/merchant.yml --with-registry-auth malu-master"
+  only:
+    - /^release-uat-v(?:.[0-9]+)+$/
+    - /^release-v(?:.[0-9]+)+$/
+   
+deploy_prod: 
+  stage: deploy
+  when: manual
+  script: 
+    - ssh -tt root@103.124.92.76 "export IMAGE_TAG=$IMAGE_TAG && docker stack deploy -c /home/docker/merchant.yml --with-registry-auth malu-master"
+  only:
+    - /^release-uat-v(?:.[0-9]+)+$/
+    - /^release-v(?:.[0-9]+)+$/
